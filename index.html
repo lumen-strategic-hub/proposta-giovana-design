@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Proposta Design · Giovana</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0C0B0F;
+    --bg-card: #14131A;
+    --bg-card-hi: #191722;
+    --accent: #C9A96E;
+    --accent-soft: rgba(201, 169, 110, 0.12);
+    --text: #E8E4DD;
+    --text-soft: #9B978F;
+    --text-muted: #6B6862;
+    --border: rgba(201, 169, 110, 0.15);
+    --white: #FDFCFA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+  }
+  .noise {
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999;
+  }
+  .glow-orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    top: -200px; right: -200px; pointer-events: none; z-index: 0;
+  }
+  .glow-orb-2 {
+    position: fixed; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.04) 0%, transparent 70%);
+    bottom: -150px; left: -150px; pointer-events: none; z-index: 0;
+  }
+  .container {
+    max-width: 940px; margin: 0 auto;
+    padding: 60px 32px 80px; position: relative; z-index: 1;
+  }
+
+  .header { text-align: center; margin-bottom: 56px; animation: fadeUp .8s ease-out both; }
+  .brand {
+    font-weight: 500; font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 32px; display: inline-block;
+    padding: 8px 20px; border: 1px solid var(--border); border-radius: 100px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    font-size: clamp(36px, 6vw, 52px); color: var(--white); line-height: 1.15; margin-bottom: 16px;
+  }
+  .header h1 em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .header .subtitle {
+    font-size: 15px; color: var(--text-soft); max-width: 520px; margin: 0 auto; line-height: 1.7;
+  }
+
+  .valor { margin-bottom: 56px; animation: fadeUp .8s ease-out .08s both; }
+  .valor .abertura {
+    font-size: 16px; color: var(--text); line-height: 1.8; max-width: 640px;
+    margin: 0 auto 32px; text-align: center;
+  }
+  .valor .abertura strong { color: var(--white); font-weight: 500; }
+  .valor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .valor-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 26px 24px; transition: border-color .3s, transform .3s;
+  }
+  .valor-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .valor-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600;
+    color: var(--white); line-height: 1.25; margin-bottom: 10px;
+  }
+  .valor-card p { font-size: 13px; color: var(--text-soft); line-height: 1.7; }
+  .escolha {
+    text-align: center; margin-bottom: 30px; animation: fadeUp .8s ease-out .1s both;
+  }
+  .escolha .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .escolha h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .escolha p { font-size: 14px; color: var(--text-soft); max-width: 560px; margin: 0 auto; }
+
+  .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  .model {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 30px 24px; display: flex; flex-direction: column;
+    transition: border-color .3s, transform .3s;
+    animation: fadeUp .8s ease-out both;
+  }
+  .model:nth-child(1) { animation-delay: .12s; }
+  .model:nth-child(2) { animation-delay: .2s; }
+  .model:nth-child(3) { animation-delay: .28s; }
+  .model:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .model .tag {
+    align-self: flex-start; padding: 6px 14px; margin-bottom: 14px;
+    background: var(--accent-soft); border: 1px solid var(--border); border-radius: 100px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 500;
+  }
+  .model .name {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600;
+    color: var(--white); line-height: 1.2; margin-bottom: 6px;
+  }
+  .model .resumo { font-size: 13px; color: var(--text-soft); line-height: 1.6; margin-bottom: 22px; }
+
+  .model ul { list-style: none; }
+  .model li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--text-soft); line-height: 1.55; margin-bottom: 12px;
+  }
+  .model li .mark { color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+  .model li strong { color: var(--text); font-weight: 500; }
+  .model li.destaque { color: var(--accent); }
+  .model li.destaque strong { color: var(--accent); font-weight: 500; }
+  .model li.aparte { color: var(--text-muted); }
+  .model li.aparte .mark { color: var(--text-muted); }
+
+  .model .preco-bloco {
+    margin-top: auto; padding-top: 24px; border-top: 1px solid rgba(201,169,110,0.15); text-align: center;
+  }
+  .model .preco {
+    font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700;
+    color: var(--white); line-height: 1; margin-bottom: 4px;
+  }
+  .model .preco span {
+    font-size: 0.4em; color: var(--accent); font-weight: 400;
+    vertical-align: super; margin-right: 4px;
+  }
+  .model .preco-note {
+    font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .model .mais {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--accent); margin: 12px 0 8px;
+  }
+  .model .pct {
+    font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700;
+    color: var(--white); line-height: 1; margin-bottom: 4px;
+  }
+  .model .pct-note { font-size: 12px; color: var(--text-soft); line-height: 1.55; }
+  .model .sem-com { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+
+  .fine { font-size: 12px; color: var(--text-muted); margin-top: 28px; text-align: center; line-height: 1.8; }
+
+  .footer {
+    text-align: center; margin-top: 60px; padding-top: 32px;
+    border-top: 1px solid rgba(201,169,110,0.08);
+  }
+  .footer .logo-text {
+    font-family: 'Cormorant Garamond', serif; font-size: 24px;
+    font-weight: 600; color: var(--accent); margin-bottom: 8px;
+  }
+  .footer p { font-size: 12px; color: var(--text-muted); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 880px) {
+    .models { grid-template-columns: 1fr; }
+    .valor-grid { grid-template-columns: 1fr; }
+    .model .preco-bloco { text-align: left; }
+  }
+  @media (max-width: 520px) {
+    .container { padding: 40px 20px 60px; }
+  }
+</style>
+<style>
+  .bloco { margin-bottom: 56px; animation: fadeUp .8s ease-out both; }
+  .bloco-head { text-align: center; margin-bottom: 30px; }
+  .bloco-head .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .bloco-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+  .bloco-head p { font-size: 14px; color: var(--text-soft); max-width: 560px; margin: 0 auto; }
+
+  /* caminho */
+  .caminho { list-style: none; display: grid; grid-template-columns: repeat(var(--passos, 5), 1fr); gap: 14px; position: relative; }
+  .caminho::before { content: ""; position: absolute; top: 22px; left: 10%; right: 10%; height: 1px; background: rgba(201,169,110,0.35); }
+  .passo { position: relative; text-align: center; }
+  .passo .num {
+    width: 44px; height: 44px; margin: 0 auto 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;
+    background: var(--bg); border: 1px solid var(--accent); color: var(--accent);
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;
+  }
+  .passo .prazo { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .nota-prazo { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 22px; }
+  .passo h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 8px; }
+  .passo p { font-size: 12.5px; color: var(--text-soft); line-height: 1.6; }
+
+  /* ancoragem */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px; }
+  .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 18px; text-align: center; }
+  .stat .lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .stat .big { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--white); line-height: 1.1; }
+  .clientes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .cliente { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; }
+  .cliente .h { font-size: 13px; color: var(--text); font-weight: 500; overflow-wrap: anywhere; }
+  .cliente .n { font-size: 11px; color: var(--text-muted); }
+
+  /* oferta */
+  .oferta { max-width: 620px; margin: 0 auto; }
+  .model.solo { background: var(--bg-card-hi); border-color: rgba(201,169,110,0.35); }
+  .model .parcela { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--accent); margin-bottom: 2px; }
+  .model .avista { font-size: 13px; color: var(--text-soft); margin-top: 10px; }
+  .model .avista strong { color: var(--text); font-weight: 500; }
+  .upgrade {
+    margin-top: 16px; padding: 22px 24px; border: 1px dashed rgba(201,169,110,0.45); border-radius: 16px;
+    display: flex; gap: 18px; align-items: center; justify-content: space-between;
+  }
+  .upgrade .t { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .upgrade h3 { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 4px; }
+  .upgrade p { font-size: 13px; color: var(--text-soft); }
+  .upgrade .v { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; color: var(--white); white-space: nowrap; }
+  .upgrade .v span { font-size: .5em; color: var(--accent); font-weight: 400; vertical-align: super; margin-right: 3px; }
+
+  .bonus { margin: 22px auto 0; max-width: 620px; padding: 26px 28px; text-align: center; background: var(--accent-soft); border: 1px solid rgba(201,169,110,0.4); border-radius: 20px; }
+  .bonus .tag { display: inline-block; padding: 6px 14px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 100px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 500; background: var(--bg-card); }
+  .bonus h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 8px; }
+  .bonus h3 em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .bonus p { font-size: 14px; color: var(--text-soft); line-height: 1.7; }
+  .bonus p strong { color: var(--text); font-weight: 500; }
+
+  @media (max-width: 880px) {
+    .caminho { grid-template-columns: 1fr; gap: 0; }
+    .caminho::before { top: 22px; bottom: 22px; left: 21px; right: auto; width: 1px; height: auto; }
+    .passo { text-align: left; display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; padding-bottom: 22px; }
+    .passo .num { margin: 0; grid-row: span 3; }
+    .stats { grid-template-columns: 1fr; }
+    .clientes { grid-template-columns: 1fr 1fr; }
+    .upgrade { flex-direction: column; align-items: flex-start; }
+  }
+
+  .time { margin: 18px auto 0; max-width: 620px; padding: 24px 28px; text-align: center; background: var(--accent-soft); border: 1px solid rgba(201,169,110,0.4); border-radius: 20px; }
+  .time h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 6px; }
+  .time p { font-size: 13px; color: var(--text-soft); }
+  .model .cond { font-size: 11px; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px; }
+  .valor-grid.tres { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 880px) { .valor-grid.tres { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="glow-orb"></div>
+<div class="glow-orb-2"></div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="brand">Lumen Strategic Hub</div>
+    <h1>Design dos seus <em>carrosséis</em></h1>
+    <p class="subtitle">Pacote extra para a Giovana. A arte passa a nascer no mesmo lugar que a copy.</p>
+  </div>
+
+  <div class="valor">
+    <p class="abertura">Hoje a copy nasce na Lumen e a arte nasce fora. Com o design aqui dentro, o carrossel inteiro sai da mesma esteira: quem escreve e quem desenha trabalham no mesmo card, com a mesma referência de marca. <strong>Menos uma frente pra você acompanhar, e um feed com mais camadas.</strong></p>
+
+    <div class="valor-grid">
+      <div class="valor-card">
+        <h3>Copy e arte na mesma esteira</h3>
+        <p>O designer recebe a copy aprovada direto no card. Você não precisa repassar texto, referência nem prazo pra ninguém.</p>
+      </div>
+      <div class="valor-card">
+        <h3>Design com camadas, feito à mão</h3>
+        <p>Composição com foto, textura e profundidade, feita por designer que trabalha só com isso. É o padrão de arte que você escolheu pro seu feed.</p>
+      </div>
+      <div class="valor-card">
+        <h3>Menos coisa no seu prato</h3>
+        <p>Briefing, prazo e ajustes ficam com a gestão de projetos da Lumen. O seu papel continua o mesmo de hoje: aprovar.</p>
+      </div>
+      <div class="valor-card">
+        <h3>Feed e anúncios na mesma linha</h3>
+        <p>Os seus criativos de tráfego já saem daqui. Com o feed no mesmo time, tudo que a sua audiência vê tem a mesma identidade.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloco">
+    <div class="bloco-head">
+      <div class="section-label">Como funciona</div>
+      <h2>O caminho de cada carrossel</h2>
+    </div>
+    <ol class="caminho" style="--passos:5">
+      <li class="passo"><div class="num">1</div><div class="prazo">Como hoje</div><h3>Copy aprovada</h3><p>Você aprova a copy no card, no fluxo que já usa.</p></li>
+      <li class="passo"><div class="num">2</div><div class="prazo">Lumen</div><h3>Design</h3><p>O designer monta a arte a partir da copy aprovada.</p></li>
+      <li class="passo"><div class="num">3</div><div class="prazo">Você</div><h3>Aprovação da arte</h3><p>Você vê o carrossel pronto no mesmo card e aprova.</p></li>
+      <li class="passo"><div class="num">4</div><div class="prazo">Se precisar</div><h3>Ajustes</h3><p>Até 2 rodadas de ajuste por peça.</p></li>
+      <li class="passo"><div class="num">5</div><div class="prazo">Entrega</div><h3>Pronto pra postar</h3><p>Arte final e legenda no card, no prazo do calendário.</p></li>
+    </ol>
+  </div>
+
+  <div class="bloco oferta">
+    <div class="bloco-head">
+      <div class="section-label">Investimento</div>
+    </div>
+    <div class="model solo">
+      <div class="tag">Pacote extra</div>
+      <div class="name">Design de carrosséis</div>
+      <div class="resumo">8 carrosséis por mês, durante 6 meses.</div>
+      <ul>
+        <li><span class="mark">✓</span><span><strong>8 carrosséis por mês</strong>, 48 no total</span></li>
+        <li><span class="mark">✓</span><span>Arte feita a partir das copies que já produzimos no seu contrato</span></li>
+        <li><span class="mark">✓</span><span><strong>Design com o Thiago</strong>, designer da Lumen, dedicado ao seu projeto</span></li>
+        <li><span class="mark">✓</span><span>Aprovação e ajustes no mesmo fluxo de hoje, com até 2 rodadas por peça</span></li>
+        <li><span class="mark">✓</span><span>Gestão de projetos acompanhando da copy à entrega</span></li>
+        <li><span class="mark">✓</span><span>Memes continuam com você, como hoje</span></li>
+        <li><span class="mark">✓</span><span>Prazo de 6 meses, com início em novembro</span></li>
+      </ul>
+      <div class="preco-bloco">
+        <div class="preco"><span>R$</span>770</div>
+        <div class="preco-note">por mês</div>
+        <div class="cond">Condição especial de cliente Lumen</div>
+      </div>
+    </div>
+
+    <div class="time">
+      <h3>O mesmo time que já cuida do seu conteúdo, agora com o design dentro</h3>
+      <p>Estratégia, copy, design, vídeo, tráfego e gestão de projetos trabalhando no seu projeto.</p>
+    </div>
+  </div>
+
+  <p class="fine">O pacote cobre o design dos carrosséis do seu conteúdo. Os criativos de anúncio seguem dentro do contrato de tráfego.</p>
+
+  <div class="footer">
+    <div class="logo-text">Lumen</div>
+    <p>Strategic Hub</p>
+  </div>
+
+</div>
+</body>
+</html>
